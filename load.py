@@ -40,10 +40,10 @@ def unicodeToAscii(s):
 
 # Lowercase, trim, and remove non-letter characters
 def normalizeString(s):
-    s = unicodeToAscii(s.lower().strip())
+    # s = unicodeToAscii(s.lower().strip())
     s = re.sub(r"([.!?])", r" \1", s)
-    s = re.sub(r"[^a-zA-Z.!?]+", r" ", s)
-    s = re.sub(r"\s+", r" ", s).strip()
+    # s = re.sub(r"[^a-zA-Z.!?]+", r" ", s)
+    # s = re.sub(r"\s+", r" ", s).strip()
     return s
 
 def readVocs(corpus, corpus_name):
@@ -56,8 +56,8 @@ def readVocs(corpus, corpus_name):
     # content = gzip.open(corpus, 'rt')
     lines = [x.strip() for x in content]
     it = iter(lines)
-    # pairs = [[normalizeString(x), normalizeString(next(it))] for x in it]
-    pairs = [[x, next(it)] for x in it]
+    pairs = [[normalizeString(x), normalizeString(next(it))] for x in it]
+    # pairs = [[x, next(it)] for x in it]
 
     voc = Voc(corpus_name)
     return voc, pairs
